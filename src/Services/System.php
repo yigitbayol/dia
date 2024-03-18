@@ -18,7 +18,7 @@ class System
      *
      * @return void
      */
-    public function getInfo(): array
+    public function info(): array
     {
         $this->dia->initialize();
         $session_id = $this->dia->getSessionId();
@@ -50,7 +50,7 @@ class System
      * @param  mixed $params
      * @return array
      */
-    public function getCompany($firmaKodu = '1', $params = ''): array
+    public function getCompanyInfo($firmaKodu = '1', $params = ''): array
     {
         $this->dia->initialize();
         $sessionId = $this->dia->getSessionId();

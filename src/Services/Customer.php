@@ -24,7 +24,7 @@ class Customer
      * @param  mixed $params
      * @return array
      */
-    public function getCustomers($firmaKodu, $donemKodu, $limit = 10, $offset = 0, $sorts = [['field' => 'carikartkodu', 'sorttype' => 'DESC']], $params = ['irsaliyeleriDahilEt' => 'False']): array
+    public function getCustomers($firmaKodu, $donemKodu, $limit = 10, $offset = 0, $filters = "", $sorts = [['field' => 'carikartkodu', 'sorttype' => 'DESC']], $params = ['irsaliyeleriDahilEt' => 'False']): array
     {
         $this->dia->initialize();
         $sessionId = $this->dia->getSessionId();
@@ -36,7 +36,7 @@ class Customer
                 "session_id" => $sessionId,
                 "firma_kodu" => $firmaKodu,
                 "donem_kodu" => $donemKodu,
-                "filters" => "",
+                "filters" => $filters,
                 "sorts" => $sorts,
                 "params" => $params,
                 "limit" => $limit,
@@ -64,7 +64,7 @@ class Customer
      * @param  mixed $key
      * @return array
      */
-    public function getCustomer($firmaKodu, $donemKodu, $key): array
+    public function get($firmaKodu, $donemKodu, $key): array
     {
         $this->dia->initialize();
         $sessionId = $this->dia->getSessionId();
@@ -101,7 +101,7 @@ class Customer
      * @param  mixed $kart
      * @return array
      */
-    public function createCustomer($firmaKodu, $donemKodu, $kart): array
+    public function create($firmaKodu, $donemKodu, $kart): array
     {
         $this->dia->initialize();
         $sessionId = $this->dia->getSessionId();
@@ -137,7 +137,7 @@ class Customer
      * @param  mixed $kart
      * @return array
      */
-    public function updateCustomer($firmaKodu, $donemKodu, $kart): array
+    public function update($firmaKodu, $donemKodu, $kart): array
     {
         $this->dia->initialize();
         $sessionId = $this->dia->getSessionId();
@@ -173,7 +173,7 @@ class Customer
      * @param  mixed $key
      * @return array
      */
-    public function deleteCustomer($firmaKodu, $donemKodu, $key): array
+    public function delete($firmaKodu, $donemKodu, $key, $params = ""): array
     {
         $this->dia->initialize();
         $sessionId = $this->dia->getSessionId();
@@ -186,7 +186,7 @@ class Customer
                 "firma_kodu" => $firmaKodu,
                 "donem_kodu" => $donemKodu,
                 "key" => $key,
-                "params" => ""
+                "params" => $params
             ]
         ];
 

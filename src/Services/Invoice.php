@@ -29,7 +29,7 @@ class Invoice
      * @param  mixed $kart
      * @return array
      */
-    public function createInvoice($firmaKodu, $donemKodu, $kart): array
+    public function create($firmaKodu, $donemKodu, $kart): array
     {
         $this->dia->initialize();
         $sessionId = $this->dia->getSessionId();
@@ -64,7 +64,7 @@ class Invoice
      * @param  mixed $kart
      * @return array
      */
-    public function updateInvoice($firmaKodu, $donemKodu, $kart): array
+    public function update($firmaKodu, $donemKodu, $kart): array
     {
         $this->dia->initialize();
         $sessionId = $this->dia->getSessionId();
@@ -99,7 +99,7 @@ class Invoice
      * @param  mixed $key
      * @return array
      */
-    public function getInvoice($firmaKodu, $donemKodu, $key): array
+    public function get($firmaKodu, $donemKodu, $key, $params = ""): array
     {
         $this->dia->initialize();
         $sessionId = $this->dia->getSessionId();
@@ -112,7 +112,7 @@ class Invoice
                 "firma_kodu" => $firmaKodu,
                 "donem_kodu" => $donemKodu,
                 "key" => $key,
-                "params" => ""
+                "params" => $params
             ]
         ];
 
@@ -136,7 +136,7 @@ class Invoice
      * @param  mixed $key
      * @return array
      */
-    public function deleteInvoice($firmaKodu, $donemKodu, $key): array
+    public function delete($firmaKodu, $donemKodu, $key, $params = ""): array
     {
         $this->dia->initialize();
         $sessionId = $this->dia->getSessionId();
@@ -149,7 +149,7 @@ class Invoice
                 "firma_kodu" => $firmaKodu,
                 "donem_kodu" => $donemKodu,
                 "key" => $key,
-                "params" => ""
+                "params" => $params
             ]
         ];
 
@@ -177,7 +177,7 @@ class Invoice
      * @param  mixed $params
      * @return void
      */
-    public function getInvoices($firmaKodu, $donemKodu, $limit = 10, $offset = 0, $filters = '', $sorts = '', $params = ''): array
+    public function list($firmaKodu, $donemKodu, $limit = 10, $offset = 0, $filters = '', $sorts = '', $params = ''): array
     {
         $this->dia->initialize();
         $sessionId = $this->dia->getSessionId();
@@ -221,7 +221,7 @@ class Invoice
      * @param  mixed $params
      * @return void
      */
-    public function getInvoicesDetailed($firmaKodu, $donemKodu, $limit = 10, $offset = 0, $filters = '', $sorts = '', $params = ''): array
+    public function listDetailed($firmaKodu, $donemKodu, $limit = 10, $offset = 0, $filters = '', $sorts = '', $params = ''): array
     {
         $this->dia->initialize();
         $sessionId = $this->dia->getSessionId();
