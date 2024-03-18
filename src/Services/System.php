@@ -60,7 +60,7 @@ class System
         $postData = [
             "sis_firma_getir" => [
                 "session_id" => $sessionId,
-                "firma_kodu" => $firmaKodu,
+                "firma_kodu" => intval($firmaKodu),
                 "params" => $params
             ]
         ];
@@ -93,7 +93,7 @@ class System
         $postData = [
             "sis_firma_yetki_listesi_getir" => [
                 "session_id" => $sessionId,
-                "firma_kodu" => $firmaKodu
+                "firma_kodu" => intval($firmaKodu)
             ]
         ];
 

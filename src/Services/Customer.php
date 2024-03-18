@@ -34,9 +34,9 @@ class Customer
         $postData = [
             "scf_carikart_listele" => [
                 "session_id" => $sessionId,
-                "firma_kodu" => $firmaKodu,
-                "donem_kodu" => $donemKodu,
-                "filters" => $filters,
+                "firma_kodu" => intval($firmaKodu),
+                "donem_kodu" => intval($donemKodu),
+                "filters" => array($filters),
                 "sorts" => $sorts,
                 "params" => $params,
                 "limit" => $limit,
@@ -74,8 +74,8 @@ class Customer
         $postData = [
             "scf_carikart_getir" => [
                 "session_id" => $sessionId,
-                "firma_kodu" => $firmaKodu,
-                "donem_kodu" => $donemKodu,
+                "firma_kodu" => intval($firmaKodu),
+                "donem_kodu" => intval($donemKodu),
                 "key" => $key,
                 "params" => ""
             ]
@@ -111,8 +111,8 @@ class Customer
         $postData = [
             "scf_carikart_ekle" => [
                 "session_id" => $sessionId,
-                "firma_kodu" => $firmaKodu,
-                "donem_kodu" => $donemKodu,
+                "firma_kodu" => intval($firmaKodu),
+                "donem_kodu" => intval($donemKodu),
                 "kart" => $kart
             ]
         ];
@@ -147,8 +147,8 @@ class Customer
         $postData = [
             "scf_carikart_guncelle" => [
                 "session_id" => $sessionId,
-                "firma_kodu" => $firmaKodu,
-                "donem_kodu" => $donemKodu,
+                "firma_kodu" => intval($firmaKodu),
+                "donem_kodu" => intval($donemKodu),
                 "kart" => $kart
             ]
         ];
@@ -183,8 +183,8 @@ class Customer
         $postData = [
             "scf_carikart_sil" => [
                 "session_id" => $sessionId,
-                "firma_kodu" => $firmaKodu,
-                "donem_kodu" => $donemKodu,
+                "firma_kodu" => intval($firmaKodu),
+                "donem_kodu" => intval($donemKodu),
                 "key" => $key,
                 "params" => $params
             ]

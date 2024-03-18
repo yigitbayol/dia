@@ -13,14 +13,7 @@ class Invoice
         $this->dia = $dia;
     }
 
-    /**
-     * createInvoice - Dia'da fatura düzenler
-     *
-     * @param  mixed $firmaKodu
-     * @param  mixed $donemKodu
-     * @param  mixed $kart
-     * @return array
-     */
+
     /**
      * createInvoice - Dia'da yeni bir fatura oluşturur.
      *
@@ -38,8 +31,8 @@ class Invoice
         $postData = [
             "scf_fatura_ekle" => [
                 "session_id" => $sessionId,
-                "firma_kodu" => $firmaKodu,
-                "donem_kodu" => $donemKodu,
+                "firma_kodu" => intval($firmaKodu),
+                "donem_kodu" => intval($donemKodu),
                 "kart" => $kart
             ]
         ];
@@ -73,8 +66,8 @@ class Invoice
         $postData = [
             "scf_fatura_guncelle" => [
                 "session_id" => $sessionId,
-                "firma_kodu" => $firmaKodu,
-                "donem_kodu" => $donemKodu,
+                "firma_kodu" => intval($firmaKodu),
+                "donem_kodu" => intval($donemKodu),
                 "kart" => $kart
             ]
         ];
@@ -109,8 +102,8 @@ class Invoice
         $postData = [
             "scf_fatura_getir" => [
                 "session_id" => $sessionId,
-                "firma_kodu" => $firmaKodu,
-                "donem_kodu" => $donemKodu,
+                "firma_kodu" => intval($firmaKodu),
+                "donem_kodu" => intval($donemKodu),
                 "key" => $key,
                 "params" => $params
             ]
@@ -146,8 +139,8 @@ class Invoice
         $postData = [
             "scf_fatura_sil" => [
                 "session_id" => $sessionId,
-                "firma_kodu" => $firmaKodu,
-                "donem_kodu" => $donemKodu,
+                "firma_kodu" => intval($firmaKodu),
+                "donem_kodu" => intval($donemKodu),
                 "key" => $key,
                 "params" => $params
             ]
@@ -187,9 +180,9 @@ class Invoice
         $postData = [
             "scf_fatura_listele" => [
                 "session_id" => $sessionId,
-                "firma_kodu" => $firmaKodu,
-                "donem_kodu" => $donemKodu,
-                "filters" => $filters,
+                "firma_kodu" => intval($firmaKodu),
+                "donem_kodu" => intval($donemKodu),
+                "filters" => array($filters),
                 "sorts" => $sorts,
                 "params" => $params,
                 "limit" => $limit,
@@ -231,9 +224,9 @@ class Invoice
         $postData = [
             "scf_fatura_listele_ayrintili" => [
                 "session_id" => $sessionId,
-                "firma_kodu" => $firmaKodu,
-                "donem_kodu" => $donemKodu,
-                "filters" => $filters,
+                "firma_kodu" => intval($firmaKodu),
+                "donem_kodu" => intval($donemKodu),
+                "filters" => array($filters),
                 "sorts" => $sorts,
                 "params" => $params,
                 "limit" => $limit,
