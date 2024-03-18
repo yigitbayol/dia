@@ -19,6 +19,7 @@ class Dia
         $this->initialize();
         $this->system = new System($this);
         $this->customer = new Customer($this);
+        $this->invoice = new Invoice($this);
     }
 
     public function initialize()
