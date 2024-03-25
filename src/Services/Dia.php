@@ -62,7 +62,7 @@ class Dia
         ];
 
         // POST isteği yap ve yanıtı al
-        $response = Http::asJson()->post(config('dia.url'), $parameters);
+        $response = Http::asJson()->post(config('dia.url'). 'sis/json', $parameters);
 
         // Yanıtın gövdesini JSON olarak ayrıştır
         $responseBody = $response->json();
