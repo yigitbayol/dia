@@ -22,6 +22,11 @@ class Dia
         $this->invoice = new Invoice($this);
     }
 
+    /**
+     * initialize
+     *
+     * @return void
+     */
     public function initialize()
     {
         $tokenDetails = $this->getSessionIdFromDatabaseOrApi();
@@ -57,7 +62,7 @@ class Dia
         ];
 
         // POST isteği yap ve yanıtı al
-        $response = Http::asJson()->post('https://wlagenel.ws.dia.com.tr/api/v3/sis/json', $parameters);
+        $response = Http::asJson()->post(config('dia.url'), $parameters);
 
         // Yanıtın gövdesini JSON olarak ayrıştır
         $responseBody = $response->json();
