@@ -20,6 +20,7 @@ class Dia
         $this->system = new System($this);
         $this->customer = new Customer($this);
         $this->invoice = new Invoice($this);
+        $this->stock = new Stock($this);
     }
 
     /**
@@ -62,7 +63,7 @@ class Dia
         ];
 
         // POST isteği yap ve yanıtı al
-        $response = Http::asJson()->post(config('dia.url'). 'sis/json', $parameters);
+        $response = Http::asJson()->post(config('dia.url') . 'sis/json', $parameters);
 
         // Yanıtın gövdesini JSON olarak ayrıştır
         $responseBody = $response->json();
