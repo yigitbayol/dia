@@ -37,7 +37,8 @@ class Dia
     private function getSessionIdFromDatabaseOrApi()
     {
         // Önce veritabanından token'i deneyin
-        $setting = DiaSetting::first();
+
+        $setting = DiaSetting::where('expire_at', '>=', now())->first();
         if ($setting && $setting->session_id) {
             return [
                 'session_id' => $setting->session_id
@@ -54,7 +55,7 @@ class Dia
             "login" => [
                 "username" => config('dia.username'),
                 "password" => config('dia.password'),
-                "disconnect_same_user" => true,
+                "disconnect_same_user" => false,
                 "lang" => "tr",
                 "params" => [
                     "apikey" => config('dia.api_key')
@@ -68,12 +69,13 @@ class Dia
         // Yanıtın gövdesini JSON olarak ayrıştır
         $responseBody = $response->json();
 
-        if (isset ($responseBody['msg'])) {
+        if (isset($responseBody['msg'])) {
             $this->setSessionId($responseBody['msg']);
         }
 
         return [
             'session_id' => $this->session_id,
+            'expire_at' => now()->addMinutes(30)->format('Y-m-d H:i:s') // Token süresi 30 dakika olacak
         ];
     }
 
