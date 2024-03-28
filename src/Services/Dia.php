@@ -21,6 +21,7 @@ class Dia
         $this->customer = new Customer($this);
         $this->invoice = new Invoice($this);
         $this->stock = new Stock($this);
+        $this->service = new Service($this);
     }
 
     /**
