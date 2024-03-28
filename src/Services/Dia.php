@@ -55,7 +55,7 @@ class Dia
             "login" => [
                 "username" => config('dia.username'),
                 "password" => config('dia.password'),
-                "disconnect_same_user" => false,
+                "disconnect_same_user" => true,
                 "lang" => "tr",
                 "params" => [
                     "apikey" => config('dia.api_key')
