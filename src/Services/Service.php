@@ -29,7 +29,7 @@ class Service
 
         $baseUrl = config('dia.url') . 'shy/json';
         $postData = [
-            "shy_servisformu_tipi_listele" => [
+            "shy_servisformu_ekle" => [
                 "session_id" => $sessionId,
                 "firma_kodu" => intval($firmaKodu),
                 "donem_kodu" => intval($donemKodu),
