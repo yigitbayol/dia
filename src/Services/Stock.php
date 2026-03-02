@@ -22,7 +22,7 @@ class Stock
      * @param  mixed $kart
      * @return array
      */
-    public function create($firmaKodu, $donemKodu, $kart): array
+    public function create($firmaKodu, $donemKodu, $kart, $retried = false): array
     {
         $this->dia->initialize();
         $sessionId = $this->dia->getSessionId();
@@ -40,7 +40,15 @@ class Stock
         $response = Http::asJson()->post($baseUrl, $postData);
 
         if ($response->successful()) {
-            return $response->json();
+            $result = $response->json();
+
+            // INVALID_SESSION kontrolü - token yenileyip tekrar dene
+            if (!$retried && $this->dia->isInvalidSession($result)) {
+                $this->dia->refreshSession();
+                return $this->create($firmaKodu, $donemKodu, $kart, true);
+            }
+
+            return $result;
         } else {
             return [
                 'error' => true,
@@ -92,7 +100,7 @@ class Stock
      * @param  mixed $key
      * @return array
      */
-    public function get($firmaKodu, $donemKodu, $key, $params = ""): array
+    public function get($firmaKodu, $donemKodu, $key, $params = "", $retried = false): array
     {
         $this->dia->initialize();
         $sessionId = $this->dia->getSessionId();
@@ -104,7 +112,7 @@ class Stock
                 "session_id" => $sessionId,
                 "firma_kodu" => intval($firmaKodu),
                 "donem_kodu" => intval($donemKodu),
-                "key" => $key,
+                "key" => intval($key),
                 "params" => $params
             ]
         ];
@@ -112,7 +120,15 @@ class Stock
         $response = Http::asJson()->post($baseUrl, $postData);
 
         if ($response->successful()) {
-            return $response->json();
+            $result = $response->json();
+
+            // INVALID_SESSION kontrolü - token yenileyip tekrar dene
+            if (!$retried && $this->dia->isInvalidSession($result)) {
+                $this->dia->refreshSession();
+                return $this->get($firmaKodu, $donemKodu, $key, $params, true);
+            }
+
+            return $result;
         } else {
             return [
                 'error' => true,
@@ -170,7 +186,7 @@ class Stock
      * @param  mixed $params
      * @return void
      */
-    public function list($firmaKodu, $donemKodu, $limit = 10, $offset = 0, $filters = '', $sorts = '', $params = ''): array
+    public function list($firmaKodu, $donemKodu, $limit = 10, $offset = 0, $filters = '', $sorts = '', $params = '', $retried = false): array
     {
         $this->dia->initialize();
         $sessionId = $this->dia->getSessionId();
@@ -193,7 +209,15 @@ class Stock
         $response = Http::asJson()->post($baseUrl, $postData);
 
         if ($response->successful()) {
-            return $response->json();
+            $result = $response->json();
+
+            // INVALID_SESSION kontrolü - token yenileyip tekrar dene
+            if (!$retried && $this->dia->isInvalidSession($result)) {
+                $this->dia->refreshSession();
+                return $this->list($firmaKodu, $donemKodu, $limit, $offset, $filters, $sorts, $params, true);
+            }
+
+            return $result;
         } else {
             return [
                 'error' => true,

@@ -88,11 +88,36 @@ class Dia
         // Veritabanında token ve süresini güncelleyin
         DiaSetting::updateOrCreate(['id' => 1], [
             'session_id' => $token,
+            'expire_at' => now()->addMinutes(30),
         ]);
     }
 
     public function getSessionId()
     {
         return $this->session_id;
+    }
+
+    /**
+     * Session'ı yenile (INVALID_SESSION durumunda kullanılır)
+     */
+    public function refreshSession()
+    {
+        // Mevcut token'ı geçersiz kıl
+        DiaSetting::where('id', 1)->update(['expire_at' => now()->subMinute()]);
+
+        // Yeni token al
+        $tokenDetails = $this->fetchSessionIdFromApi();
+        $this->session_id = $tokenDetails['session_id'];
+
+        return $this->session_id;
+    }
+
+    /**
+     * INVALID_SESSION hatası kontrolü
+     */
+    public function isInvalidSession($response)
+    {
+        return isset($response['code']) && $response['code'] == '401' &&
+               isset($response['msg']) && $response['msg'] == 'INVALID_SESSION';
     }
 }
